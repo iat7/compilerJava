@@ -212,27 +212,23 @@ void IRTranslate::visit(const IfStatement* if_statement) {
     IStm* body;
 	Label t("true");
 	Label f("false");
-	//Label q("quitCondition");
+	Label q("quitCondition");
 
 	std::cout << "before create if body" << std::endl;
  
-	 
-	body =	new SeqStm (irtree,
-						ifExpWrapper->to_cond(t, f),
-						new SeqStm(	irtree,
-									new SeqStm	(	
-												irtree,
-												new LabelStm(irtree,t),												
-												thenStateWrapper->to_stmt()															
-												),
-									new SeqStm	(	
-												irtree,
-												new LabelStm(irtree,f),
-												elseStateWrapper->to_stmt()
-												)
-									)
-						);
-
+	body = new SeqStm(irtree,
+		new SeqStm(irtree,
+			ifExpWrapper->to_cond(t, f),
+			new SeqStm(irtree,
+				new SeqStm(irtree,
+					new LabelStm(irtree,t),
+					new SeqStm(irtree,
+						thenStateWrapper->to_stmt(),
+						new JumpStm(irtree,new NameExp(irtree,q), {q}))),
+				new SeqStm(irtree,
+					new LabelStm(irtree,f),
+					elseStateWrapper->to_stmt()))), 
+		new LabelStm(irtree,q));
 
 	lastWrapper = new StmWrapper(irtree,body);
 
@@ -265,28 +261,14 @@ void IRTranslate::visit(const WhileStatement* while_statement) {
     IStm* body;
 	Label t("true");
 	Label f("false");
-	Label q("quitCond");
 
-	body = new SeqStm (	irtree,
-						new SeqStm	(	
-									irtree,
-									new SeqStm	(
-												irtree,
-												conditionExpWrapper->to_cond(t, f),
-												new SeqStm	(
-																irtree,
-																new LabelStm(irtree,t),
-																new SeqStm (
-																			irtree, 
-																			inloopStmtWrapper->to_stmt(),
-																			new JumpStm(irtree,new NameExp(irtree,q), {q})
-																			)
-															)
-												), 
-									new LabelStm(irtree,f)
-									),
-						new LabelStm(irtree,q)
-						);
+	body = new SeqStm(irtree,
+		new SeqStm(irtree,
+			conditionExpWrapper->to_cond(t, f),
+			new SeqStm(irtree,
+				new LabelStm(irtree,t), 
+				inloopStmtWrapper->to_stmt())), 
+		new LabelStm(irtree,f)); // видимо f отдастся следущему
 
 	lastWrapper = new StmWrapper(irtree,body);
 }
