@@ -2,6 +2,7 @@
 #include "../IR/Converters.h"
 #include "../IR/IRTree_classes.h"
 #include "InstructionSet.h"
+#include <memory.h>
 
 class CodeGeneration {
 public:

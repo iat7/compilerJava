@@ -1,9 +1,9 @@
-Terminals which are not used
+Терминалы не используются в грамматике
 
    OR
 
 
-Grammar
+Грамматика
 
     0 $accept: goal END
 
@@ -15,10 +15,10 @@ Grammar
     4          | CLASS id extends_block BTBR_L method_list BTBR_R
 
     5 class_dec_list: class_dec_list class_dec
-    6               | /* empty */
+    6               | %empty
 
     7 extends_block: EXTENDS id
-    8              | /* empty */
+    8              | %empty
 
     9 var_dec: type id SEMICOLON
 
@@ -31,11 +31,11 @@ Grammar
    15       | PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L RETURN expression SEMICOLON BTBR_R
 
    16 method_list: method_list method
-   17            | /* empty */
+   17            | %empty
 
    18 arglist: arglist COMMA type id
    19        | type id
-   20        | /* empty */
+   20        | %empty
 
    21 stmnt_list: stmnt_list statement
    22           | statement
@@ -71,15 +71,15 @@ Grammar
    49           | RNDBR_L expression RNDBR_R
 
    50 expression_list: expression expression_add
-   51                | /* empty */
+   51                | %empty
 
    52 expression_add: expression_add COMMA expression
-   53               | /* empty */
+   53               | %empty
 
    54 id: ID
 
 
-Terminals, with rules where they appear
+Терминальные символы с правилами, в которых они появляются
 
 END (0) 0
 error (256)
@@ -121,458 +121,458 @@ NUM (292) 41
 ID (293) 54
 
 
-Nonterminals, with rules where they appear
+Нетерминальные символы с правилами, в которых они появляются
 
 $accept (39)
-    on left: 0
+    налево: 0
 goal (40)
-    on left: 1, on right: 0
+    налево: 1, направо: 0
 main_class (41)
-    on left: 2, on right: 1
+    налево: 2, направо: 1
 class_dec (42)
-    on left: 3 4, on right: 5
+    налево: 3 4, направо: 5
 class_dec_list (43)
-    on left: 5 6, on right: 1 5
+    налево: 5 6, направо: 1 5
 extends_block (44)
-    on left: 7 8, on right: 3 4
+    налево: 7 8, направо: 3 4
 var_dec (45)
-    on left: 9, on right: 10 11
+    налево: 9, направо: 10 11
 var_dec_list (46)
-    on left: 10 11, on right: 3 10 12 14
+    налево: 10 11, направо: 3 10 12 14
 method (47)
-    on left: 12 13 14 15, on right: 16
+    налево: 12 13 14 15, направо: 16
 method_list (48)
-    on left: 16 17, on right: 3 4 16
+    налево: 16 17, направо: 3 4 16
 arglist (49)
-    on left: 18 19 20, on right: 12 13 14 15 18
+    налево: 18 19 20, направо: 12 13 14 15 18
 stmnt_list (50)
-    on left: 21 22, on right: 12 13 21 27
+    налево: 21 22, направо: 12 13 21 27
 type (51)
-    on left: 23 24 25 26, on right: 9 12 13 14 15 18 19
+    налево: 23 24 25 26, направо: 9 12 13 14 15 18 19
 statement (52)
-    on left: 27 28 29 30 31 32, on right: 2 21 22 28 29
+    налево: 27 28 29 30 31 32, направо: 2 21 22 28 29
 expression (53)
-    on left: 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49,
-    on right: 12 13 14 15 28 29 30 31 32 33 34 35 36 37 38 39 40 46
-    48 49 50 52
+    налево: 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49,
+    направо: 12 13 14 15 28 29 30 31 32 33 34 35 36 37 38 39
+    40 46 48 49 50 52
 expression_list (54)
-    on left: 50 51, on right: 40
+    налево: 50 51, направо: 40
 expression_add (55)
-    on left: 52 53, on right: 50 52
+    налево: 52 53, направо: 50 52
 id (56)
-    on left: 54, on right: 2 3 4 7 9 12 13 14 15 18 19 26 31 32 40
-    44 47
+    налево: 54, направо: 2 3 4 7 9 12 13 14 15 18 19 26
+    31 32 40 44 47
 
 
-state 0
+Состояние 0
 
     0 $accept: . goal END
 
-    CLASS  shift, and go to state 1
+    CLASS  сдвиг, и переход в состояние 1
 
-    goal        go to state 2
-    main_class  go to state 3
+    goal        переход в состояние 2
+    main_class  переход в состояние 3
 
 
-state 1
+Состояние 1
 
     2 main_class: CLASS . id BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    ID  shift, and go to state 4
+    ID  сдвиг, и переход в состояние 4
 
-    id  go to state 5
+    id  переход в состояние 5
 
 
-state 2
+Состояние 2
 
     0 $accept: goal . END
 
-    END  shift, and go to state 6
+    END  сдвиг, и переход в состояние 6
 
 
-state 3
+Состояние 3
 
     1 goal: main_class . class_dec_list
 
-    $default  reduce using rule 6 (class_dec_list)
+    $default  вывод с использованием правила 6 (class_dec_list)
 
-    class_dec_list  go to state 7
+    class_dec_list  переход в состояние 7
 
 
-state 4
+Состояние 4
 
    54 id: ID .
 
-    $default  reduce using rule 54 (id)
+    $default  вывод с использованием правила 54 (id)
 
 
-state 5
+Состояние 5
 
     2 main_class: CLASS id . BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    BTBR_L  shift, and go to state 8
+    BTBR_L  сдвиг, и переход в состояние 8
 
 
-state 6
+Состояние 6
 
     0 $accept: goal END .
 
-    $default  accept
+    $default  принять
 
 
-state 7
+Состояние 7
 
     1 goal: main_class class_dec_list .
     5 class_dec_list: class_dec_list . class_dec
 
-    CLASS  shift, and go to state 9
+    CLASS  сдвиг, и переход в состояние 9
 
-    $default  reduce using rule 1 (goal)
+    $default  вывод с использованием правила 1 (goal)
 
-    class_dec  go to state 10
+    class_dec  переход в состояние 10
 
 
-state 8
+Состояние 8
 
     2 main_class: CLASS id BTBR_L . PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    PUBLIC  shift, and go to state 11
+    PUBLIC  сдвиг, и переход в состояние 11
 
 
-state 9
+Состояние 9
 
     3 class_dec: CLASS . id extends_block BTBR_L var_dec_list method_list BTBR_R
     4          | CLASS . id extends_block BTBR_L method_list BTBR_R
 
-    ID  shift, and go to state 4
+    ID  сдвиг, и переход в состояние 4
 
-    id  go to state 12
+    id  переход в состояние 12
 
 
-state 10
+Состояние 10
 
     5 class_dec_list: class_dec_list class_dec .
 
-    $default  reduce using rule 5 (class_dec_list)
+    $default  вывод с использованием правила 5 (class_dec_list)
 
 
-state 11
+Состояние 11
 
     2 main_class: CLASS id BTBR_L PUBLIC . MAIN RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    MAIN  shift, and go to state 13
+    MAIN  сдвиг, и переход в состояние 13
 
 
-state 12
+Состояние 12
 
     3 class_dec: CLASS id . extends_block BTBR_L var_dec_list method_list BTBR_R
     4          | CLASS id . extends_block BTBR_L method_list BTBR_R
 
-    EXTENDS  shift, and go to state 14
+    EXTENDS  сдвиг, и переход в состояние 14
 
-    $default  reduce using rule 8 (extends_block)
+    $default  вывод с использованием правила 8 (extends_block)
 
-    extends_block  go to state 15
+    extends_block  переход в состояние 15
 
 
-state 13
+Состояние 13
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN . RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    RNDBR_L  shift, and go to state 16
+    RNDBR_L  сдвиг, и переход в состояние 16
 
 
-state 14
+Состояние 14
 
     7 extends_block: EXTENDS . id
 
-    ID  shift, and go to state 4
+    ID  сдвиг, и переход в состояние 4
 
-    id  go to state 17
+    id  переход в состояние 17
 
 
-state 15
+Состояние 15
 
     3 class_dec: CLASS id extends_block . BTBR_L var_dec_list method_list BTBR_R
     4          | CLASS id extends_block . BTBR_L method_list BTBR_R
 
-    BTBR_L  shift, and go to state 18
+    BTBR_L  сдвиг, и переход в состояние 18
 
 
-state 16
+Состояние 16
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L . STRING SQBR_L SQBR_R id RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    STRING  shift, and go to state 19
+    STRING  сдвиг, и переход в состояние 19
 
 
-state 17
+Состояние 17
 
     7 extends_block: EXTENDS id .
 
-    $default  reduce using rule 7 (extends_block)
+    $default  вывод с использованием правила 7 (extends_block)
 
 
-state 18
+Состояние 18
 
     3 class_dec: CLASS id extends_block BTBR_L . var_dec_list method_list BTBR_R
     4          | CLASS id extends_block BTBR_L . method_list BTBR_R
 
-    INT   shift, and go to state 20
-    BOOL  shift, and go to state 21
-    ID    shift, and go to state 4
+    INT   сдвиг, и переход в состояние 20
+    BOOL  сдвиг, и переход в состояние 21
+    ID    сдвиг, и переход в состояние 4
 
-    $default  reduce using rule 17 (method_list)
+    $default  вывод с использованием правила 17 (method_list)
 
-    var_dec       go to state 22
-    var_dec_list  go to state 23
-    method_list   go to state 24
-    type          go to state 25
-    id            go to state 26
+    var_dec       переход в состояние 22
+    var_dec_list  переход в состояние 23
+    method_list   переход в состояние 24
+    type          переход в состояние 25
+    id            переход в состояние 26
 
 
-state 19
+Состояние 19
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L STRING . SQBR_L SQBR_R id RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    SQBR_L  shift, and go to state 27
+    SQBR_L  сдвиг, и переход в состояние 27
 
 
-state 20
+Состояние 20
 
    23 type: INT . SQBR_L SQBR_R
    25     | INT .
 
-    SQBR_L  shift, and go to state 28
+    SQBR_L  сдвиг, и переход в состояние 28
 
-    $default  reduce using rule 25 (type)
+    $default  вывод с использованием правила 25 (type)
 
 
-state 21
+Состояние 21
 
    24 type: BOOL .
 
-    $default  reduce using rule 24 (type)
+    $default  вывод с использованием правила 24 (type)
 
 
-state 22
+Состояние 22
 
    11 var_dec_list: var_dec .
 
-    $default  reduce using rule 11 (var_dec_list)
+    $default  вывод с использованием правила 11 (var_dec_list)
 
 
-state 23
+Состояние 23
 
     3 class_dec: CLASS id extends_block BTBR_L var_dec_list . method_list BTBR_R
    10 var_dec_list: var_dec_list . var_dec
 
-    INT   shift, and go to state 20
-    BOOL  shift, and go to state 21
-    ID    shift, and go to state 4
+    INT   сдвиг, и переход в состояние 20
+    BOOL  сдвиг, и переход в состояние 21
+    ID    сдвиг, и переход в состояние 4
 
-    $default  reduce using rule 17 (method_list)
+    $default  вывод с использованием правила 17 (method_list)
 
-    var_dec      go to state 29
-    method_list  go to state 30
-    type         go to state 25
-    id           go to state 26
+    var_dec      переход в состояние 29
+    method_list  переход в состояние 30
+    type         переход в состояние 25
+    id           переход в состояние 26
 
 
-state 24
+Состояние 24
 
     4 class_dec: CLASS id extends_block BTBR_L method_list . BTBR_R
    16 method_list: method_list . method
 
-    PUBLIC  shift, and go to state 31
-    BTBR_R  shift, and go to state 32
+    PUBLIC  сдвиг, и переход в состояние 31
+    BTBR_R  сдвиг, и переход в состояние 32
 
-    method  go to state 33
+    method  переход в состояние 33
 
 
-state 25
+Состояние 25
 
     9 var_dec: type . id SEMICOLON
 
-    ID  shift, and go to state 4
+    ID  сдвиг, и переход в состояние 4
 
-    id  go to state 34
+    id  переход в состояние 34
 
 
-state 26
+Состояние 26
 
    26 type: id .
 
-    $default  reduce using rule 26 (type)
+    $default  вывод с использованием правила 26 (type)
 
 
-state 27
+Состояние 27
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L . SQBR_R id RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    SQBR_R  shift, and go to state 35
+    SQBR_R  сдвиг, и переход в состояние 35
 
 
-state 28
+Состояние 28
 
    23 type: INT SQBR_L . SQBR_R
 
-    SQBR_R  shift, and go to state 36
+    SQBR_R  сдвиг, и переход в состояние 36
 
 
-state 29
+Состояние 29
 
    10 var_dec_list: var_dec_list var_dec .
 
-    $default  reduce using rule 10 (var_dec_list)
+    $default  вывод с использованием правила 10 (var_dec_list)
 
 
-state 30
+Состояние 30
 
     3 class_dec: CLASS id extends_block BTBR_L var_dec_list method_list . BTBR_R
    16 method_list: method_list . method
 
-    PUBLIC  shift, and go to state 31
-    BTBR_R  shift, and go to state 37
+    PUBLIC  сдвиг, и переход в состояние 31
+    BTBR_R  сдвиг, и переход в состояние 37
 
-    method  go to state 33
+    method  переход в состояние 33
 
 
-state 31
+Состояние 31
 
    12 method: PUBLIC . type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list stmnt_list RETURN expression SEMICOLON BTBR_R
    13       | PUBLIC . type id RNDBR_L arglist RNDBR_R BTBR_L stmnt_list RETURN expression SEMICOLON BTBR_R
    14       | PUBLIC . type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list RETURN expression SEMICOLON BTBR_R
    15       | PUBLIC . type id RNDBR_L arglist RNDBR_R BTBR_L RETURN expression SEMICOLON BTBR_R
 
-    INT   shift, and go to state 20
-    BOOL  shift, and go to state 21
-    ID    shift, and go to state 4
+    INT   сдвиг, и переход в состояние 20
+    BOOL  сдвиг, и переход в состояние 21
+    ID    сдвиг, и переход в состояние 4
 
-    type  go to state 38
-    id    go to state 26
+    type  переход в состояние 38
+    id    переход в состояние 26
 
 
-state 32
+Состояние 32
 
     4 class_dec: CLASS id extends_block BTBR_L method_list BTBR_R .
 
-    $default  reduce using rule 4 (class_dec)
+    $default  вывод с использованием правила 4 (class_dec)
 
 
-state 33
+Состояние 33
 
    16 method_list: method_list method .
 
-    $default  reduce using rule 16 (method_list)
+    $default  вывод с использованием правила 16 (method_list)
 
 
-state 34
+Состояние 34
 
     9 var_dec: type id . SEMICOLON
 
-    SEMICOLON  shift, and go to state 39
+    SEMICOLON  сдвиг, и переход в состояние 39
 
 
-state 35
+Состояние 35
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R . id RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    ID  shift, and go to state 4
+    ID  сдвиг, и переход в состояние 4
 
-    id  go to state 40
+    id  переход в состояние 40
 
 
-state 36
+Состояние 36
 
    23 type: INT SQBR_L SQBR_R .
 
-    $default  reduce using rule 23 (type)
+    $default  вывод с использованием правила 23 (type)
 
 
-state 37
+Состояние 37
 
     3 class_dec: CLASS id extends_block BTBR_L var_dec_list method_list BTBR_R .
 
-    $default  reduce using rule 3 (class_dec)
+    $default  вывод с использованием правила 3 (class_dec)
 
 
-state 38
+Состояние 38
 
    12 method: PUBLIC type . id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list stmnt_list RETURN expression SEMICOLON BTBR_R
    13       | PUBLIC type . id RNDBR_L arglist RNDBR_R BTBR_L stmnt_list RETURN expression SEMICOLON BTBR_R
    14       | PUBLIC type . id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list RETURN expression SEMICOLON BTBR_R
    15       | PUBLIC type . id RNDBR_L arglist RNDBR_R BTBR_L RETURN expression SEMICOLON BTBR_R
 
-    ID  shift, and go to state 4
+    ID  сдвиг, и переход в состояние 4
 
-    id  go to state 41
+    id  переход в состояние 41
 
 
-state 39
+Состояние 39
 
     9 var_dec: type id SEMICOLON .
 
-    $default  reduce using rule 9 (var_dec)
+    $default  вывод с использованием правила 9 (var_dec)
 
 
-state 40
+Состояние 40
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R id . RNDBR_R BTBR_L statement BTBR_R BTBR_R
 
-    RNDBR_R  shift, and go to state 42
+    RNDBR_R  сдвиг, и переход в состояние 42
 
 
-state 41
+Состояние 41
 
    12 method: PUBLIC type id . RNDBR_L arglist RNDBR_R BTBR_L var_dec_list stmnt_list RETURN expression SEMICOLON BTBR_R
    13       | PUBLIC type id . RNDBR_L arglist RNDBR_R BTBR_L stmnt_list RETURN expression SEMICOLON BTBR_R
    14       | PUBLIC type id . RNDBR_L arglist RNDBR_R BTBR_L var_dec_list RETURN expression SEMICOLON BTBR_R
    15       | PUBLIC type id . RNDBR_L arglist RNDBR_R BTBR_L RETURN expression SEMICOLON BTBR_R
 
-    RNDBR_L  shift, and go to state 43
+    RNDBR_L  сдвиг, и переход в состояние 43
 
 
-state 42
+Состояние 42
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R . BTBR_L statement BTBR_R BTBR_R
 
-    BTBR_L  shift, and go to state 44
+    BTBR_L  сдвиг, и переход в состояние 44
 
 
-state 43
+Состояние 43
 
    12 method: PUBLIC type id RNDBR_L . arglist RNDBR_R BTBR_L var_dec_list stmnt_list RETURN expression SEMICOLON BTBR_R
    13       | PUBLIC type id RNDBR_L . arglist RNDBR_R BTBR_L stmnt_list RETURN expression SEMICOLON BTBR_R
    14       | PUBLIC type id RNDBR_L . arglist RNDBR_R BTBR_L var_dec_list RETURN expression SEMICOLON BTBR_R
    15       | PUBLIC type id RNDBR_L . arglist RNDBR_R BTBR_L RETURN expression SEMICOLON BTBR_R
 
-    INT   shift, and go to state 20
-    BOOL  shift, and go to state 21
-    ID    shift, and go to state 4
+    INT   сдвиг, и переход в состояние 20
+    BOOL  сдвиг, и переход в состояние 21
+    ID    сдвиг, и переход в состояние 4
 
-    $default  reduce using rule 20 (arglist)
+    $default  вывод с использованием правила 20 (arglist)
 
-    arglist  go to state 45
-    type     go to state 46
-    id       go to state 26
+    arglist  переход в состояние 45
+    type     переход в состояние 46
+    id       переход в состояние 26
 
 
-state 44
+Состояние 44
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R BTBR_L . statement BTBR_R BTBR_R
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    BTBR_L  shift, and go to state 49
-    PRINT   shift, and go to state 50
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    BTBR_L  сдвиг, и переход в состояние 49
+    PRINT   сдвиг, и переход в состояние 50
+    ID      сдвиг, и переход в состояние 4
 
-    statement  go to state 51
-    id         go to state 52
+    statement  переход в состояние 51
+    id         переход в состояние 52
 
 
-state 45
+Состояние 45
 
    12 method: PUBLIC type id RNDBR_L arglist . RNDBR_R BTBR_L var_dec_list stmnt_list RETURN expression SEMICOLON BTBR_R
    13       | PUBLIC type id RNDBR_L arglist . RNDBR_R BTBR_L stmnt_list RETURN expression SEMICOLON BTBR_R
@@ -580,322 +580,322 @@ state 45
    15       | PUBLIC type id RNDBR_L arglist . RNDBR_R BTBR_L RETURN expression SEMICOLON BTBR_R
    18 arglist: arglist . COMMA type id
 
-    RNDBR_R  shift, and go to state 53
-    COMMA    shift, and go to state 54
+    RNDBR_R  сдвиг, и переход в состояние 53
+    COMMA    сдвиг, и переход в состояние 54
 
 
-state 46
+Состояние 46
 
    19 arglist: type . id
 
-    ID  shift, and go to state 4
+    ID  сдвиг, и переход в состояние 4
 
-    id  go to state 55
+    id  переход в состояние 55
 
 
-state 47
+Состояние 47
 
    28 statement: IF . RNDBR_L expression RNDBR_R statement ELSE statement
 
-    RNDBR_L  shift, and go to state 56
+    RNDBR_L  сдвиг, и переход в состояние 56
 
 
-state 48
+Состояние 48
 
    29 statement: WHILE . RNDBR_L expression RNDBR_R statement
 
-    RNDBR_L  shift, and go to state 57
+    RNDBR_L  сдвиг, и переход в состояние 57
 
 
-state 49
+Состояние 49
 
    27 statement: BTBR_L . stmnt_list BTBR_R
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    BTBR_L  shift, and go to state 49
-    PRINT   shift, and go to state 50
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    BTBR_L  сдвиг, и переход в состояние 49
+    PRINT   сдвиг, и переход в состояние 50
+    ID      сдвиг, и переход в состояние 4
 
-    stmnt_list  go to state 58
-    statement   go to state 59
-    id          go to state 52
+    stmnt_list  переход в состояние 58
+    statement   переход в состояние 59
+    id          переход в состояние 52
 
 
-state 50
+Состояние 50
 
    30 statement: PRINT . RNDBR_L expression RNDBR_R SEMICOLON
 
-    RNDBR_L  shift, and go to state 60
+    RNDBR_L  сдвиг, и переход в состояние 60
 
 
-state 51
+Состояние 51
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R BTBR_L statement . BTBR_R BTBR_R
 
-    BTBR_R  shift, and go to state 61
+    BTBR_R  сдвиг, и переход в состояние 61
 
 
-state 52
+Состояние 52
 
    31 statement: id . EQ expression SEMICOLON
    32          | id . SQBR_L expression SQBR_R EQ expression SEMICOLON
 
-    SQBR_L  shift, and go to state 62
-    EQ      shift, and go to state 63
+    SQBR_L  сдвиг, и переход в состояние 62
+    EQ      сдвиг, и переход в состояние 63
 
 
-state 53
+Состояние 53
 
    12 method: PUBLIC type id RNDBR_L arglist RNDBR_R . BTBR_L var_dec_list stmnt_list RETURN expression SEMICOLON BTBR_R
    13       | PUBLIC type id RNDBR_L arglist RNDBR_R . BTBR_L stmnt_list RETURN expression SEMICOLON BTBR_R
    14       | PUBLIC type id RNDBR_L arglist RNDBR_R . BTBR_L var_dec_list RETURN expression SEMICOLON BTBR_R
    15       | PUBLIC type id RNDBR_L arglist RNDBR_R . BTBR_L RETURN expression SEMICOLON BTBR_R
 
-    BTBR_L  shift, and go to state 64
+    BTBR_L  сдвиг, и переход в состояние 64
 
 
-state 54
+Состояние 54
 
    18 arglist: arglist COMMA . type id
 
-    INT   shift, and go to state 20
-    BOOL  shift, and go to state 21
-    ID    shift, and go to state 4
+    INT   сдвиг, и переход в состояние 20
+    BOOL  сдвиг, и переход в состояние 21
+    ID    сдвиг, и переход в состояние 4
 
-    type  go to state 65
-    id    go to state 26
+    type  переход в состояние 65
+    id    переход в состояние 26
 
 
-state 55
+Состояние 55
 
    19 arglist: type id .
 
-    $default  reduce using rule 19 (arglist)
+    $default  вывод с использованием правила 19 (arglist)
 
 
-state 56
+Состояние 56
 
    28 statement: IF RNDBR_L . expression RNDBR_R statement ELSE statement
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 73
-    id          go to state 74
+    expression  переход в состояние 73
+    id          переход в состояние 74
 
 
-state 57
+Состояние 57
 
    29 statement: WHILE RNDBR_L . expression RNDBR_R statement
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 75
-    id          go to state 74
+    expression  переход в состояние 75
+    id          переход в состояние 74
 
 
-state 58
+Состояние 58
 
    21 stmnt_list: stmnt_list . statement
    27 statement: BTBR_L stmnt_list . BTBR_R
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    BTBR_L  shift, and go to state 49
-    BTBR_R  shift, and go to state 76
-    PRINT   shift, and go to state 50
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    BTBR_L  сдвиг, и переход в состояние 49
+    BTBR_R  сдвиг, и переход в состояние 76
+    PRINT   сдвиг, и переход в состояние 50
+    ID      сдвиг, и переход в состояние 4
 
-    statement  go to state 77
-    id         go to state 52
+    statement  переход в состояние 77
+    id         переход в состояние 52
 
 
-state 59
+Состояние 59
 
    22 stmnt_list: statement .
 
-    $default  reduce using rule 22 (stmnt_list)
+    $default  вывод с использованием правила 22 (stmnt_list)
 
 
-state 60
+Состояние 60
 
    30 statement: PRINT RNDBR_L . expression RNDBR_R SEMICOLON
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 78
-    id          go to state 74
+    expression  переход в состояние 78
+    id          переход в состояние 74
 
 
-state 61
+Состояние 61
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R BTBR_L statement BTBR_R . BTBR_R
 
-    BTBR_R  shift, and go to state 79
+    BTBR_R  сдвиг, и переход в состояние 79
 
 
-state 62
+Состояние 62
 
    32 statement: id SQBR_L . expression SQBR_R EQ expression SEMICOLON
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 80
-    id          go to state 74
+    expression  переход в состояние 80
+    id          переход в состояние 74
 
 
-state 63
+Состояние 63
 
    31 statement: id EQ . expression SEMICOLON
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 81
-    id          go to state 74
+    expression  переход в состояние 81
+    id          переход в состояние 74
 
 
-state 64
+Состояние 64
 
    12 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L . var_dec_list stmnt_list RETURN expression SEMICOLON BTBR_R
    13       | PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L . stmnt_list RETURN expression SEMICOLON BTBR_R
    14       | PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L . var_dec_list RETURN expression SEMICOLON BTBR_R
    15       | PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L . RETURN expression SEMICOLON BTBR_R
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    INT     shift, and go to state 20
-    BOOL    shift, and go to state 21
-    BTBR_L  shift, and go to state 49
-    PRINT   shift, and go to state 50
-    RETURN  shift, and go to state 82
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    INT     сдвиг, и переход в состояние 20
+    BOOL    сдвиг, и переход в состояние 21
+    BTBR_L  сдвиг, и переход в состояние 49
+    PRINT   сдвиг, и переход в состояние 50
+    RETURN  сдвиг, и переход в состояние 82
+    ID      сдвиг, и переход в состояние 4
 
-    var_dec       go to state 22
-    var_dec_list  go to state 83
-    stmnt_list    go to state 84
-    type          go to state 25
-    statement     go to state 59
-    id            go to state 85
+    var_dec       переход в состояние 22
+    var_dec_list  переход в состояние 83
+    stmnt_list    переход в состояние 84
+    type          переход в состояние 25
+    statement     переход в состояние 59
+    id            переход в состояние 85
 
 
-state 65
+Состояние 65
 
    18 arglist: arglist COMMA type . id
 
-    ID  shift, and go to state 4
+    ID  сдвиг, и переход в состояние 4
 
-    id  go to state 86
+    id  переход в состояние 86
 
 
-state 66
+Состояние 66
 
    45 expression: THIS .
 
-    $default  reduce using rule 45 (expression)
+    $default  вывод с использованием правила 45 (expression)
 
 
-state 67
+Состояние 67
 
    46 expression: NEW . INT SQBR_L expression SQBR_R
    47           | NEW . id RNDBR_L RNDBR_R
 
-    INT  shift, and go to state 87
-    ID   shift, and go to state 4
+    INT  сдвиг, и переход в состояние 87
+    ID   сдвиг, и переход в состояние 4
 
-    id  go to state 88
+    id  переход в состояние 88
 
 
-state 68
+Состояние 68
 
    49 expression: RNDBR_L . expression RNDBR_R
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 89
-    id          go to state 74
+    expression  переход в состояние 89
+    id          переход в состояние 74
 
 
-state 69
+Состояние 69
 
    48 expression: EXCL . expression
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 90
-    id          go to state 74
+    expression  переход в состояние 90
+    id          переход в состояние 74
 
 
-state 70
+Состояние 70
 
    43 expression: FALSE .
 
-    $default  reduce using rule 43 (expression)
+    $default  вывод с использованием правила 43 (expression)
 
 
-state 71
+Состояние 71
 
    42 expression: TRUE .
 
-    $default  reduce using rule 42 (expression)
+    $default  вывод с использованием правила 42 (expression)
 
 
-state 72
+Состояние 72
 
    41 expression: NUM .
 
-    $default  reduce using rule 41 (expression)
+    $default  вывод с использованием правила 41 (expression)
 
 
-state 73
+Состояние 73
 
    28 statement: IF RNDBR_L expression . RNDBR_R statement ELSE statement
    33 expression: expression . AND expression
@@ -907,24 +907,24 @@ state 73
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L   shift, and go to state 91
-    RNDBR_R  shift, and go to state 92
-    DOT      shift, and go to state 93
-    AND      shift, and go to state 94
-    PLUS     shift, and go to state 95
-    MINUS    shift, and go to state 96
-    STAR     shift, and go to state 97
-    LESS     shift, and go to state 98
+    SQBR_L   сдвиг, и переход в состояние 91
+    RNDBR_R  сдвиг, и переход в состояние 92
+    DOT      сдвиг, и переход в состояние 93
+    AND      сдвиг, и переход в состояние 94
+    PLUS     сдвиг, и переход в состояние 95
+    MINUS    сдвиг, и переход в состояние 96
+    STAR     сдвиг, и переход в состояние 97
+    LESS     сдвиг, и переход в состояние 98
 
 
-state 74
+Состояние 74
 
    44 expression: id .
 
-    $default  reduce using rule 44 (expression)
+    $default  вывод с использованием правила 44 (expression)
 
 
-state 75
+Состояние 75
 
    29 statement: WHILE RNDBR_L expression . RNDBR_R statement
    33 expression: expression . AND expression
@@ -936,31 +936,31 @@ state 75
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L   shift, and go to state 91
-    RNDBR_R  shift, and go to state 99
-    DOT      shift, and go to state 93
-    AND      shift, and go to state 94
-    PLUS     shift, and go to state 95
-    MINUS    shift, and go to state 96
-    STAR     shift, and go to state 97
-    LESS     shift, and go to state 98
+    SQBR_L   сдвиг, и переход в состояние 91
+    RNDBR_R  сдвиг, и переход в состояние 99
+    DOT      сдвиг, и переход в состояние 93
+    AND      сдвиг, и переход в состояние 94
+    PLUS     сдвиг, и переход в состояние 95
+    MINUS    сдвиг, и переход в состояние 96
+    STAR     сдвиг, и переход в состояние 97
+    LESS     сдвиг, и переход в состояние 98
 
 
-state 76
+Состояние 76
 
    27 statement: BTBR_L stmnt_list BTBR_R .
 
-    $default  reduce using rule 27 (statement)
+    $default  вывод с использованием правила 27 (statement)
 
 
-state 77
+Состояние 77
 
    21 stmnt_list: stmnt_list statement .
 
-    $default  reduce using rule 21 (stmnt_list)
+    $default  вывод с использованием правила 21 (stmnt_list)
 
 
-state 78
+Состояние 78
 
    30 statement: PRINT RNDBR_L expression . RNDBR_R SEMICOLON
    33 expression: expression . AND expression
@@ -972,24 +972,24 @@ state 78
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L   shift, and go to state 91
-    RNDBR_R  shift, and go to state 100
-    DOT      shift, and go to state 93
-    AND      shift, and go to state 94
-    PLUS     shift, and go to state 95
-    MINUS    shift, and go to state 96
-    STAR     shift, and go to state 97
-    LESS     shift, and go to state 98
+    SQBR_L   сдвиг, и переход в состояние 91
+    RNDBR_R  сдвиг, и переход в состояние 100
+    DOT      сдвиг, и переход в состояние 93
+    AND      сдвиг, и переход в состояние 94
+    PLUS     сдвиг, и переход в состояние 95
+    MINUS    сдвиг, и переход в состояние 96
+    STAR     сдвиг, и переход в состояние 97
+    LESS     сдвиг, и переход в состояние 98
 
 
-state 79
+Состояние 79
 
     2 main_class: CLASS id BTBR_L PUBLIC MAIN RNDBR_L STRING SQBR_L SQBR_R id RNDBR_R BTBR_L statement BTBR_R BTBR_R .
 
-    $default  reduce using rule 2 (main_class)
+    $default  вывод с использованием правила 2 (main_class)
 
 
-state 80
+Состояние 80
 
    32 statement: id SQBR_L expression . SQBR_R EQ expression SEMICOLON
    33 expression: expression . AND expression
@@ -1001,17 +1001,17 @@ state 80
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L  shift, and go to state 91
-    SQBR_R  shift, and go to state 101
-    DOT     shift, and go to state 93
-    AND     shift, and go to state 94
-    PLUS    shift, and go to state 95
-    MINUS   shift, and go to state 96
-    STAR    shift, and go to state 97
-    LESS    shift, and go to state 98
+    SQBR_L  сдвиг, и переход в состояние 91
+    SQBR_R  сдвиг, и переход в состояние 101
+    DOT     сдвиг, и переход в состояние 93
+    AND     сдвиг, и переход в состояние 94
+    PLUS    сдвиг, и переход в состояние 95
+    MINUS   сдвиг, и переход в состояние 96
+    STAR    сдвиг, и переход в состояние 97
+    LESS    сдвиг, и переход в состояние 98
 
 
-state 81
+Состояние 81
 
    31 statement: id EQ expression . SEMICOLON
    33 expression: expression . AND expression
@@ -1023,105 +1023,105 @@ state 81
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L     shift, and go to state 91
-    DOT        shift, and go to state 93
-    SEMICOLON  shift, and go to state 102
-    AND        shift, and go to state 94
-    PLUS       shift, and go to state 95
-    MINUS      shift, and go to state 96
-    STAR       shift, and go to state 97
-    LESS       shift, and go to state 98
+    SQBR_L     сдвиг, и переход в состояние 91
+    DOT        сдвиг, и переход в состояние 93
+    SEMICOLON  сдвиг, и переход в состояние 102
+    AND        сдвиг, и переход в состояние 94
+    PLUS       сдвиг, и переход в состояние 95
+    MINUS      сдвиг, и переход в состояние 96
+    STAR       сдвиг, и переход в состояние 97
+    LESS       сдвиг, и переход в состояние 98
 
 
-state 82
+Состояние 82
 
    15 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L RETURN . expression SEMICOLON BTBR_R
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 103
-    id          go to state 74
+    expression  переход в состояние 103
+    id          переход в состояние 74
 
 
-state 83
+Состояние 83
 
    10 var_dec_list: var_dec_list . var_dec
    12 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list . stmnt_list RETURN expression SEMICOLON BTBR_R
    14       | PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list . RETURN expression SEMICOLON BTBR_R
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    INT     shift, and go to state 20
-    BOOL    shift, and go to state 21
-    BTBR_L  shift, and go to state 49
-    PRINT   shift, and go to state 50
-    RETURN  shift, and go to state 104
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    INT     сдвиг, и переход в состояние 20
+    BOOL    сдвиг, и переход в состояние 21
+    BTBR_L  сдвиг, и переход в состояние 49
+    PRINT   сдвиг, и переход в состояние 50
+    RETURN  сдвиг, и переход в состояние 104
+    ID      сдвиг, и переход в состояние 4
 
-    var_dec     go to state 29
-    stmnt_list  go to state 105
-    type        go to state 25
-    statement   go to state 59
-    id          go to state 85
+    var_dec     переход в состояние 29
+    stmnt_list  переход в состояние 105
+    type        переход в состояние 25
+    statement   переход в состояние 59
+    id          переход в состояние 85
 
 
-state 84
+Состояние 84
 
    13 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L stmnt_list . RETURN expression SEMICOLON BTBR_R
    21 stmnt_list: stmnt_list . statement
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    BTBR_L  shift, and go to state 49
-    PRINT   shift, and go to state 50
-    RETURN  shift, and go to state 106
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    BTBR_L  сдвиг, и переход в состояние 49
+    PRINT   сдвиг, и переход в состояние 50
+    RETURN  сдвиг, и переход в состояние 106
+    ID      сдвиг, и переход в состояние 4
 
-    statement  go to state 77
-    id         go to state 52
+    statement  переход в состояние 77
+    id         переход в состояние 52
 
 
-state 85
+Состояние 85
 
    26 type: id .
    31 statement: id . EQ expression SEMICOLON
    32          | id . SQBR_L expression SQBR_R EQ expression SEMICOLON
 
-    SQBR_L  shift, and go to state 62
-    EQ      shift, and go to state 63
+    SQBR_L  сдвиг, и переход в состояние 62
+    EQ      сдвиг, и переход в состояние 63
 
-    $default  reduce using rule 26 (type)
+    $default  вывод с использованием правила 26 (type)
 
 
-state 86
+Состояние 86
 
    18 arglist: arglist COMMA type id .
 
-    $default  reduce using rule 18 (arglist)
+    $default  вывод с использованием правила 18 (arglist)
 
 
-state 87
+Состояние 87
 
    46 expression: NEW INT . SQBR_L expression SQBR_R
 
-    SQBR_L  shift, and go to state 107
+    SQBR_L  сдвиг, и переход в состояние 107
 
 
-state 88
+Состояние 88
 
    47 expression: NEW id . RNDBR_L RNDBR_R
 
-    RNDBR_L  shift, and go to state 108
+    RNDBR_L  сдвиг, и переход в состояние 108
 
 
-state 89
+Состояние 89
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1133,17 +1133,17 @@ state 89
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
    49           | RNDBR_L expression . RNDBR_R
 
-    SQBR_L   shift, and go to state 91
-    RNDBR_R  shift, and go to state 109
-    DOT      shift, and go to state 93
-    AND      shift, and go to state 94
-    PLUS     shift, and go to state 95
-    MINUS    shift, and go to state 96
-    STAR     shift, and go to state 97
-    LESS     shift, and go to state 98
+    SQBR_L   сдвиг, и переход в состояние 91
+    RNDBR_R  сдвиг, и переход в состояние 109
+    DOT      сдвиг, и переход в состояние 93
+    AND      сдвиг, и переход в состояние 94
+    PLUS     сдвиг, и переход в состояние 95
+    MINUS    сдвиг, и переход в состояние 96
+    STAR     сдвиг, и переход в состояние 97
+    LESS     сдвиг, и переход в состояние 98
 
 
-state 90
+Состояние 90
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1155,172 +1155,172 @@ state 90
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
    48           | EXCL expression .
 
-    $default  reduce using rule 48 (expression)
+    $default  вывод с использованием правила 48 (expression)
 
 
-state 91
+Состояние 91
 
    38 expression: expression SQBR_L . expression SQBR_R
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 110
-    id          go to state 74
+    expression  переход в состояние 110
+    id          переход в состояние 74
 
 
-state 92
+Состояние 92
 
    28 statement: IF RNDBR_L expression RNDBR_R . statement ELSE statement
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    BTBR_L  shift, and go to state 49
-    PRINT   shift, and go to state 50
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    BTBR_L  сдвиг, и переход в состояние 49
+    PRINT   сдвиг, и переход в состояние 50
+    ID      сдвиг, и переход в состояние 4
 
-    statement  go to state 111
-    id         go to state 52
+    statement  переход в состояние 111
+    id         переход в состояние 52
 
 
-state 93
+Состояние 93
 
    39 expression: expression DOT . LEN
    40           | expression DOT . id RNDBR_L expression_list RNDBR_R
 
-    LEN  shift, and go to state 112
-    ID   shift, and go to state 4
+    LEN  сдвиг, и переход в состояние 112
+    ID   сдвиг, и переход в состояние 4
 
-    id  go to state 113
+    id  переход в состояние 113
 
 
-state 94
+Состояние 94
 
    33 expression: expression AND . expression
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 114
-    id          go to state 74
+    expression  переход в состояние 114
+    id          переход в состояние 74
 
 
-state 95
+Состояние 95
 
    35 expression: expression PLUS . expression
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 115
-    id          go to state 74
+    expression  переход в состояние 115
+    id          переход в состояние 74
 
 
-state 96
+Состояние 96
 
    36 expression: expression MINUS . expression
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 116
-    id          go to state 74
+    expression  переход в состояние 116
+    id          переход в состояние 74
 
 
-state 97
+Состояние 97
 
    37 expression: expression STAR . expression
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 117
-    id          go to state 74
+    expression  переход в состояние 117
+    id          переход в состояние 74
 
 
-state 98
+Состояние 98
 
    34 expression: expression LESS . expression
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 118
-    id          go to state 74
+    expression  переход в состояние 118
+    id          переход в состояние 74
 
 
-state 99
+Состояние 99
 
    29 statement: WHILE RNDBR_L expression RNDBR_R . statement
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    BTBR_L  shift, and go to state 49
-    PRINT   shift, and go to state 50
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    BTBR_L  сдвиг, и переход в состояние 49
+    PRINT   сдвиг, и переход в состояние 50
+    ID      сдвиг, и переход в состояние 4
 
-    statement  go to state 119
-    id         go to state 52
+    statement  переход в состояние 119
+    id         переход в состояние 52
 
 
-state 100
+Состояние 100
 
    30 statement: PRINT RNDBR_L expression RNDBR_R . SEMICOLON
 
-    SEMICOLON  shift, and go to state 120
+    SEMICOLON  сдвиг, и переход в состояние 120
 
 
-state 101
+Состояние 101
 
    32 statement: id SQBR_L expression SQBR_R . EQ expression SEMICOLON
 
-    EQ  shift, and go to state 121
+    EQ  сдвиг, и переход в состояние 121
 
 
-state 102
+Состояние 102
 
    31 statement: id EQ expression SEMICOLON .
 
-    $default  reduce using rule 31 (statement)
+    $default  вывод с использованием правила 31 (statement)
 
 
-state 103
+Состояние 103
 
    15 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L RETURN expression . SEMICOLON BTBR_R
    33 expression: expression . AND expression
@@ -1332,98 +1332,98 @@ state 103
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L     shift, and go to state 91
-    DOT        shift, and go to state 93
-    SEMICOLON  shift, and go to state 122
-    AND        shift, and go to state 94
-    PLUS       shift, and go to state 95
-    MINUS      shift, and go to state 96
-    STAR       shift, and go to state 97
-    LESS       shift, and go to state 98
+    SQBR_L     сдвиг, и переход в состояние 91
+    DOT        сдвиг, и переход в состояние 93
+    SEMICOLON  сдвиг, и переход в состояние 122
+    AND        сдвиг, и переход в состояние 94
+    PLUS       сдвиг, и переход в состояние 95
+    MINUS      сдвиг, и переход в состояние 96
+    STAR       сдвиг, и переход в состояние 97
+    LESS       сдвиг, и переход в состояние 98
 
 
-state 104
+Состояние 104
 
    14 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list RETURN . expression SEMICOLON BTBR_R
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 123
-    id          go to state 74
+    expression  переход в состояние 123
+    id          переход в состояние 74
 
 
-state 105
+Состояние 105
 
    12 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list stmnt_list . RETURN expression SEMICOLON BTBR_R
    21 stmnt_list: stmnt_list . statement
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    BTBR_L  shift, and go to state 49
-    PRINT   shift, and go to state 50
-    RETURN  shift, and go to state 124
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    BTBR_L  сдвиг, и переход в состояние 49
+    PRINT   сдвиг, и переход в состояние 50
+    RETURN  сдвиг, и переход в состояние 124
+    ID      сдвиг, и переход в состояние 4
 
-    statement  go to state 77
-    id         go to state 52
+    statement  переход в состояние 77
+    id         переход в состояние 52
 
 
-state 106
+Состояние 106
 
    13 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L stmnt_list RETURN . expression SEMICOLON BTBR_R
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 125
-    id          go to state 74
+    expression  переход в состояние 125
+    id          переход в состояние 74
 
 
-state 107
+Состояние 107
 
    46 expression: NEW INT SQBR_L . expression SQBR_R
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 126
-    id          go to state 74
+    expression  переход в состояние 126
+    id          переход в состояние 74
 
 
-state 108
+Состояние 108
 
    47 expression: NEW id RNDBR_L . RNDBR_R
 
-    RNDBR_R  shift, and go to state 127
+    RNDBR_R  сдвиг, и переход в состояние 127
 
 
-state 109
+Состояние 109
 
    49 expression: RNDBR_L expression RNDBR_R .
 
-    $default  reduce using rule 49 (expression)
+    $default  вывод с использованием правила 49 (expression)
 
 
-state 110
+Состояние 110
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1435,38 +1435,38 @@ state 110
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L  shift, and go to state 91
-    SQBR_R  shift, and go to state 128
-    DOT     shift, and go to state 93
-    AND     shift, and go to state 94
-    PLUS    shift, and go to state 95
-    MINUS   shift, and go to state 96
-    STAR    shift, and go to state 97
-    LESS    shift, and go to state 98
+    SQBR_L  сдвиг, и переход в состояние 91
+    SQBR_R  сдвиг, и переход в состояние 128
+    DOT     сдвиг, и переход в состояние 93
+    AND     сдвиг, и переход в состояние 94
+    PLUS    сдвиг, и переход в состояние 95
+    MINUS   сдвиг, и переход в состояние 96
+    STAR    сдвиг, и переход в состояние 97
+    LESS    сдвиг, и переход в состояние 98
 
 
-state 111
+Состояние 111
 
    28 statement: IF RNDBR_L expression RNDBR_R statement . ELSE statement
 
-    ELSE  shift, and go to state 129
+    ELSE  сдвиг, и переход в состояние 129
 
 
-state 112
+Состояние 112
 
    39 expression: expression DOT LEN .
 
-    $default  reduce using rule 39 (expression)
+    $default  вывод с использованием правила 39 (expression)
 
 
-state 113
+Состояние 113
 
    40 expression: expression DOT id . RNDBR_L expression_list RNDBR_R
 
-    RNDBR_L  shift, and go to state 130
+    RNDBR_L  сдвиг, и переход в состояние 130
 
 
-state 114
+Состояние 114
 
    33 expression: expression . AND expression
    33           | expression AND expression .
@@ -1478,19 +1478,19 @@ state 114
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L  shift, and go to state 91
-    DOT     shift, and go to state 93
-    PLUS    shift, and go to state 95
-    MINUS   shift, and go to state 96
-    STAR    shift, and go to state 97
-    LESS    shift, and go to state 98
+    SQBR_L  сдвиг, и переход в состояние 91
+    DOT     сдвиг, и переход в состояние 93
+    PLUS    сдвиг, и переход в состояние 95
+    MINUS   сдвиг, и переход в состояние 96
+    STAR    сдвиг, и переход в состояние 97
+    LESS    сдвиг, и переход в состояние 98
 
-    AND  error (nonassociative)
+    AND  ошибка (неассоциативная)
 
-    $default  reduce using rule 33 (expression)
+    $default  вывод с использованием правила 33 (expression)
 
 
-state 115
+Состояние 115
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1502,14 +1502,14 @@ state 115
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L  shift, and go to state 91
-    DOT     shift, and go to state 93
-    STAR    shift, and go to state 97
+    SQBR_L  сдвиг, и переход в состояние 91
+    DOT     сдвиг, и переход в состояние 93
+    STAR    сдвиг, и переход в состояние 97
 
-    $default  reduce using rule 35 (expression)
+    $default  вывод с использованием правила 35 (expression)
 
 
-state 116
+Состояние 116
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1521,14 +1521,14 @@ state 116
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L  shift, and go to state 91
-    DOT     shift, and go to state 93
-    STAR    shift, and go to state 97
+    SQBR_L  сдвиг, и переход в состояние 91
+    DOT     сдвиг, и переход в состояние 93
+    STAR    сдвиг, и переход в состояние 97
 
-    $default  reduce using rule 36 (expression)
+    $default  вывод с использованием правила 36 (expression)
 
 
-state 117
+Состояние 117
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1540,13 +1540,13 @@ state 117
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L  shift, and go to state 91
-    DOT     shift, and go to state 93
+    SQBR_L  сдвиг, и переход в состояние 91
+    DOT     сдвиг, и переход в состояние 93
 
-    $default  reduce using rule 37 (expression)
+    $default  вывод с использованием правила 37 (expression)
 
 
-state 118
+Состояние 118
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1558,56 +1558,56 @@ state 118
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L  shift, and go to state 91
-    DOT     shift, and go to state 93
-    PLUS    shift, and go to state 95
-    MINUS   shift, and go to state 96
-    STAR    shift, and go to state 97
+    SQBR_L  сдвиг, и переход в состояние 91
+    DOT     сдвиг, и переход в состояние 93
+    PLUS    сдвиг, и переход в состояние 95
+    MINUS   сдвиг, и переход в состояние 96
+    STAR    сдвиг, и переход в состояние 97
 
-    LESS  error (nonassociative)
+    LESS  ошибка (неассоциативная)
 
-    $default  reduce using rule 34 (expression)
+    $default  вывод с использованием правила 34 (expression)
 
 
-state 119
+Состояние 119
 
    29 statement: WHILE RNDBR_L expression RNDBR_R statement .
 
-    $default  reduce using rule 29 (statement)
+    $default  вывод с использованием правила 29 (statement)
 
 
-state 120
+Состояние 120
 
    30 statement: PRINT RNDBR_L expression RNDBR_R SEMICOLON .
 
-    $default  reduce using rule 30 (statement)
+    $default  вывод с использованием правила 30 (statement)
 
 
-state 121
+Состояние 121
 
    32 statement: id SQBR_L expression SQBR_R EQ . expression SEMICOLON
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 131
-    id          go to state 74
+    expression  переход в состояние 131
+    id          переход в состояние 74
 
 
-state 122
+Состояние 122
 
    15 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L RETURN expression SEMICOLON . BTBR_R
 
-    BTBR_R  shift, and go to state 132
+    BTBR_R  сдвиг, и переход в состояние 132
 
 
-state 123
+Состояние 123
 
    14 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list RETURN expression . SEMICOLON BTBR_R
    33 expression: expression . AND expression
@@ -1619,34 +1619,34 @@ state 123
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L     shift, and go to state 91
-    DOT        shift, and go to state 93
-    SEMICOLON  shift, and go to state 133
-    AND        shift, and go to state 94
-    PLUS       shift, and go to state 95
-    MINUS      shift, and go to state 96
-    STAR       shift, and go to state 97
-    LESS       shift, and go to state 98
+    SQBR_L     сдвиг, и переход в состояние 91
+    DOT        сдвиг, и переход в состояние 93
+    SEMICOLON  сдвиг, и переход в состояние 133
+    AND        сдвиг, и переход в состояние 94
+    PLUS       сдвиг, и переход в состояние 95
+    MINUS      сдвиг, и переход в состояние 96
+    STAR       сдвиг, и переход в состояние 97
+    LESS       сдвиг, и переход в состояние 98
 
 
-state 124
+Состояние 124
 
    12 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list stmnt_list RETURN . expression SEMICOLON BTBR_R
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 134
-    id          go to state 74
+    expression  переход в состояние 134
+    id          переход в состояние 74
 
 
-state 125
+Состояние 125
 
    13 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L stmnt_list RETURN expression . SEMICOLON BTBR_R
    33 expression: expression . AND expression
@@ -1658,17 +1658,17 @@ state 125
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L     shift, and go to state 91
-    DOT        shift, and go to state 93
-    SEMICOLON  shift, and go to state 135
-    AND        shift, and go to state 94
-    PLUS       shift, and go to state 95
-    MINUS      shift, and go to state 96
-    STAR       shift, and go to state 97
-    LESS       shift, and go to state 98
+    SQBR_L     сдвиг, и переход в состояние 91
+    DOT        сдвиг, и переход в состояние 93
+    SEMICOLON  сдвиг, и переход в состояние 135
+    AND        сдвиг, и переход в состояние 94
+    PLUS       сдвиг, и переход в состояние 95
+    MINUS      сдвиг, и переход в состояние 96
+    STAR       сдвиг, и переход в состояние 97
+    LESS       сдвиг, и переход в состояние 98
 
 
-state 126
+Состояние 126
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1680,65 +1680,65 @@ state 126
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
    46           | NEW INT SQBR_L expression . SQBR_R
 
-    SQBR_L  shift, and go to state 91
-    SQBR_R  shift, and go to state 136
-    DOT     shift, and go to state 93
-    AND     shift, and go to state 94
-    PLUS    shift, and go to state 95
-    MINUS   shift, and go to state 96
-    STAR    shift, and go to state 97
-    LESS    shift, and go to state 98
+    SQBR_L  сдвиг, и переход в состояние 91
+    SQBR_R  сдвиг, и переход в состояние 136
+    DOT     сдвиг, и переход в состояние 93
+    AND     сдвиг, и переход в состояние 94
+    PLUS    сдвиг, и переход в состояние 95
+    MINUS   сдвиг, и переход в состояние 96
+    STAR    сдвиг, и переход в состояние 97
+    LESS    сдвиг, и переход в состояние 98
 
 
-state 127
+Состояние 127
 
    47 expression: NEW id RNDBR_L RNDBR_R .
 
-    $default  reduce using rule 47 (expression)
+    $default  вывод с использованием правила 47 (expression)
 
 
-state 128
+Состояние 128
 
    38 expression: expression SQBR_L expression SQBR_R .
 
-    $default  reduce using rule 38 (expression)
+    $default  вывод с использованием правила 38 (expression)
 
 
-state 129
+Состояние 129
 
    28 statement: IF RNDBR_L expression RNDBR_R statement ELSE . statement
 
-    IF      shift, and go to state 47
-    WHILE   shift, and go to state 48
-    BTBR_L  shift, and go to state 49
-    PRINT   shift, and go to state 50
-    ID      shift, and go to state 4
+    IF      сдвиг, и переход в состояние 47
+    WHILE   сдвиг, и переход в состояние 48
+    BTBR_L  сдвиг, и переход в состояние 49
+    PRINT   сдвиг, и переход в состояние 50
+    ID      сдвиг, и переход в состояние 4
 
-    statement  go to state 137
-    id         go to state 52
+    statement  переход в состояние 137
+    id         переход в состояние 52
 
 
-state 130
+Состояние 130
 
    40 expression: expression DOT id RNDBR_L . expression_list RNDBR_R
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    $default  reduce using rule 51 (expression_list)
+    $default  вывод с использованием правила 51 (expression_list)
 
-    expression       go to state 138
-    expression_list  go to state 139
-    id               go to state 74
+    expression       переход в состояние 138
+    expression_list  переход в состояние 139
+    id               переход в состояние 74
 
 
-state 131
+Состояние 131
 
    32 statement: id SQBR_L expression SQBR_R EQ expression . SEMICOLON
    33 expression: expression . AND expression
@@ -1750,31 +1750,31 @@ state 131
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L     shift, and go to state 91
-    DOT        shift, and go to state 93
-    SEMICOLON  shift, and go to state 140
-    AND        shift, and go to state 94
-    PLUS       shift, and go to state 95
-    MINUS      shift, and go to state 96
-    STAR       shift, and go to state 97
-    LESS       shift, and go to state 98
+    SQBR_L     сдвиг, и переход в состояние 91
+    DOT        сдвиг, и переход в состояние 93
+    SEMICOLON  сдвиг, и переход в состояние 140
+    AND        сдвиг, и переход в состояние 94
+    PLUS       сдвиг, и переход в состояние 95
+    MINUS      сдвиг, и переход в состояние 96
+    STAR       сдвиг, и переход в состояние 97
+    LESS       сдвиг, и переход в состояние 98
 
 
-state 132
+Состояние 132
 
    15 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L RETURN expression SEMICOLON BTBR_R .
 
-    $default  reduce using rule 15 (method)
+    $default  вывод с использованием правила 15 (method)
 
 
-state 133
+Состояние 133
 
    14 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list RETURN expression SEMICOLON . BTBR_R
 
-    BTBR_R  shift, and go to state 141
+    BTBR_R  сдвиг, и переход в состояние 141
 
 
-state 134
+Состояние 134
 
    12 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list stmnt_list RETURN expression . SEMICOLON BTBR_R
    33 expression: expression . AND expression
@@ -1786,38 +1786,38 @@ state 134
    39           | expression . DOT LEN
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
 
-    SQBR_L     shift, and go to state 91
-    DOT        shift, and go to state 93
-    SEMICOLON  shift, and go to state 142
-    AND        shift, and go to state 94
-    PLUS       shift, and go to state 95
-    MINUS      shift, and go to state 96
-    STAR       shift, and go to state 97
-    LESS       shift, and go to state 98
+    SQBR_L     сдвиг, и переход в состояние 91
+    DOT        сдвиг, и переход в состояние 93
+    SEMICOLON  сдвиг, и переход в состояние 142
+    AND        сдвиг, и переход в состояние 94
+    PLUS       сдвиг, и переход в состояние 95
+    MINUS      сдвиг, и переход в состояние 96
+    STAR       сдвиг, и переход в состояние 97
+    LESS       сдвиг, и переход в состояние 98
 
 
-state 135
+Состояние 135
 
    13 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L stmnt_list RETURN expression SEMICOLON . BTBR_R
 
-    BTBR_R  shift, and go to state 143
+    BTBR_R  сдвиг, и переход в состояние 143
 
 
-state 136
+Состояние 136
 
    46 expression: NEW INT SQBR_L expression SQBR_R .
 
-    $default  reduce using rule 46 (expression)
+    $default  вывод с использованием правила 46 (expression)
 
 
-state 137
+Состояние 137
 
    28 statement: IF RNDBR_L expression RNDBR_R statement ELSE statement .
 
-    $default  reduce using rule 28 (statement)
+    $default  вывод с использованием правила 28 (statement)
 
 
-state 138
+Состояние 138
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1829,96 +1829,96 @@ state 138
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
    50 expression_list: expression . expression_add
 
-    SQBR_L  shift, and go to state 91
-    DOT     shift, and go to state 93
-    AND     shift, and go to state 94
-    PLUS    shift, and go to state 95
-    MINUS   shift, and go to state 96
-    STAR    shift, and go to state 97
-    LESS    shift, and go to state 98
+    SQBR_L  сдвиг, и переход в состояние 91
+    DOT     сдвиг, и переход в состояние 93
+    AND     сдвиг, и переход в состояние 94
+    PLUS    сдвиг, и переход в состояние 95
+    MINUS   сдвиг, и переход в состояние 96
+    STAR    сдвиг, и переход в состояние 97
+    LESS    сдвиг, и переход в состояние 98
 
-    $default  reduce using rule 53 (expression_add)
+    $default  вывод с использованием правила 53 (expression_add)
 
-    expression_add  go to state 144
+    expression_add  переход в состояние 144
 
 
-state 139
+Состояние 139
 
    40 expression: expression DOT id RNDBR_L expression_list . RNDBR_R
 
-    RNDBR_R  shift, and go to state 145
+    RNDBR_R  сдвиг, и переход в состояние 145
 
 
-state 140
+Состояние 140
 
    32 statement: id SQBR_L expression SQBR_R EQ expression SEMICOLON .
 
-    $default  reduce using rule 32 (statement)
+    $default  вывод с использованием правила 32 (statement)
 
 
-state 141
+Состояние 141
 
    14 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list RETURN expression SEMICOLON BTBR_R .
 
-    $default  reduce using rule 14 (method)
+    $default  вывод с использованием правила 14 (method)
 
 
-state 142
+Состояние 142
 
    12 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list stmnt_list RETURN expression SEMICOLON . BTBR_R
 
-    BTBR_R  shift, and go to state 146
+    BTBR_R  сдвиг, и переход в состояние 146
 
 
-state 143
+Состояние 143
 
    13 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L stmnt_list RETURN expression SEMICOLON BTBR_R .
 
-    $default  reduce using rule 13 (method)
+    $default  вывод с использованием правила 13 (method)
 
 
-state 144
+Состояние 144
 
    50 expression_list: expression expression_add .
    52 expression_add: expression_add . COMMA expression
 
-    COMMA  shift, and go to state 147
+    COMMA  сдвиг, и переход в состояние 147
 
-    $default  reduce using rule 50 (expression_list)
+    $default  вывод с использованием правила 50 (expression_list)
 
 
-state 145
+Состояние 145
 
    40 expression: expression DOT id RNDBR_L expression_list RNDBR_R .
 
-    $default  reduce using rule 40 (expression)
+    $default  вывод с использованием правила 40 (expression)
 
 
-state 146
+Состояние 146
 
    12 method: PUBLIC type id RNDBR_L arglist RNDBR_R BTBR_L var_dec_list stmnt_list RETURN expression SEMICOLON BTBR_R .
 
-    $default  reduce using rule 12 (method)
+    $default  вывод с использованием правила 12 (method)
 
 
-state 147
+Состояние 147
 
    52 expression_add: expression_add COMMA . expression
 
-    THIS     shift, and go to state 66
-    NEW      shift, and go to state 67
-    RNDBR_L  shift, and go to state 68
-    EXCL     shift, and go to state 69
-    FALSE    shift, and go to state 70
-    TRUE     shift, and go to state 71
-    NUM      shift, and go to state 72
-    ID       shift, and go to state 4
+    THIS     сдвиг, и переход в состояние 66
+    NEW      сдвиг, и переход в состояние 67
+    RNDBR_L  сдвиг, и переход в состояние 68
+    EXCL     сдвиг, и переход в состояние 69
+    FALSE    сдвиг, и переход в состояние 70
+    TRUE     сдвиг, и переход в состояние 71
+    NUM      сдвиг, и переход в состояние 72
+    ID       сдвиг, и переход в состояние 4
 
-    expression  go to state 148
-    id          go to state 74
+    expression  переход в состояние 148
+    id          переход в состояние 74
 
 
-state 148
+Состояние 148
 
    33 expression: expression . AND expression
    34           | expression . LESS expression
@@ -1930,12 +1930,12 @@ state 148
    40           | expression . DOT id RNDBR_L expression_list RNDBR_R
    52 expression_add: expression_add COMMA expression .
 
-    SQBR_L  shift, and go to state 91
-    DOT     shift, and go to state 93
-    AND     shift, and go to state 94
-    PLUS    shift, and go to state 95
-    MINUS   shift, and go to state 96
-    STAR    shift, and go to state 97
-    LESS    shift, and go to state 98
+    SQBR_L  сдвиг, и переход в состояние 91
+    DOT     сдвиг, и переход в состояние 93
+    AND     сдвиг, и переход в состояние 94
+    PLUS    сдвиг, и переход в состояние 95
+    MINUS   сдвиг, и переход в состояние 96
+    STAR    сдвиг, и переход в состояние 97
+    LESS    сдвиг, и переход в состояние 98
 
-    $default  reduce using rule 52 (expression_add)
+    $default  вывод с использованием правила 52 (expression_add)

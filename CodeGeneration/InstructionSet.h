@@ -2,6 +2,7 @@
 
 #include "Instruction.h"
 #include "../IR/Temp.h"
+#include <memory.h>
 
 enum Regs {
     EAX,

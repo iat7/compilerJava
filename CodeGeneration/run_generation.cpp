@@ -2,6 +2,7 @@
 #include "../SymbolTable/typechecker.h"
 #include "../IR/IRTranslate.h"
 #include "Canonizer.h"
+#include <memory.h>
 
 extern Program *program;
 extern int yyparse();

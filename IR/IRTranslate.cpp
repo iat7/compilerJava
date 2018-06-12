@@ -1,4 +1,5 @@
 #include "IRTranslate.h"
+#include <typeinfo>
 
 void IRTranslate::visit(const Program* program) {
 
