@@ -37,7 +37,6 @@ class LS {
 	    System.out.println(number[j]);
 	    j = j + 1 ;
 	}
- 
 	return 0 ;
     }
 
