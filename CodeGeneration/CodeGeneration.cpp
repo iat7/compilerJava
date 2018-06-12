@@ -3,7 +3,6 @@
 #include "../IR/IRTree_classes.h"
 #include "CodeGeneration.h"
 #include "InstructionSet.h"
-#include <memory.h>
 
 const InstructionList CodeGeneration::generate() {
     processStm(stm);

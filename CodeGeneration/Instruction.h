@@ -1,8 +1,7 @@
 #pragma once 
-#include <memory.h>
+
 #include "../IR/IRTree_classes.h"
 #include <vector>
-
 
 class IInstruction {
 public:

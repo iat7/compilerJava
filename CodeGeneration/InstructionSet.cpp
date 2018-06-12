@@ -1,5 +1,4 @@
 #include "InstructionSet.h"
-#include <memory.h>
 
 RegMove::RegMove(const std::string code, const Temp* from, const Temp* to):
     MoveInstruction(from, to)
